@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './button.css';
+import './Button.scss';
 
-export const Button = ({primary, backgroundColor, size, label, disabled, onClick, ...props}) => {
+export default function Button({primary, backgroundColor, size, label, disabled, onClick, ...props}) {
   const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
   return (
     <button
