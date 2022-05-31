@@ -2,34 +2,83 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.scss';
 
-export default function Button({primary, backgroundColor, size, label, disabled, onClick, ...props}) {
-  const mode = primary ? 'storybook-button--primary' : 'storybook-button--secondary';
+export default function Button(
+  {
+    children,
+    className = '',
+    color = 'primary',
+    disabled = false,
+    endIcon,
+    fullWidth = false,
+    loading = false,
+    onClick,
+    size = 'medium',
+    startIcon,
+    type = 'button',
+    variant = 'contained',
+    ...props
+  }
+) {
+  const rootClasses = ['button'];
+  if (className) rootClasses.push(className);
+  if (size !== 'medium') rootClasses.push(`button--${size}`);
+  if (color !== 'primary') rootClasses.push(`button--${color}`);
+  if (fullWidth) rootClasses.push('button--full-width');
+  if (variant !== 'contained') rootClasses.push(`button--${variant}`);
+  if (loading) disabled = true;
+
+  function createRipple(event) {
+    const button = event.currentTarget;
+    const rippleWrap = button.querySelector('.button-ripple');
+    const rippleClass = 'button-ripple__item';
+
+    const circle = document.createElement('span');
+    const diameter = Math.max(button.clientWidth, button.clientHeight);
+    const radius = diameter / 2;
+
+    circle.style.width = circle.style.height = `${diameter}px`;
+    circle.style.left = `${event.clientX - button.offsetLeft - radius}px`;
+    circle.style.top = `${event.clientY - button.offsetTop - radius}px`;
+    circle.classList.add(rippleClass);
+
+    const ripple = button.getElementsByClassName(rippleClass)[0];
+    if (ripple) ripple.remove();
+
+    rippleWrap.appendChild(circle);
+    onClick && onClick(event);
+  }
+
   return (
     <button
-      type='button'
-      className={['storybook-button', `storybook-button--${size}`, mode].join(' ')}
-      style={backgroundColor && {backgroundColor}}
+      className={rootClasses.join(' ')}
+      type={type}
       disabled={disabled}
-      onClick={onClick}
+      onClick={createRipple}
       {...props}
     >
-      {label}
+      {loading ? <span className='button__loader' /> : (
+        <>
+          {startIcon && <span className='button__icon button__icon--start'>{startIcon}</span>}
+          <span className='button__label'>{children}</span>
+          {endIcon && <span className='button__icon button__icon--end'>{endIcon}</span>}
+        </>
+      )}
+      <span className='button-ripple' />
     </button>
   );
 };
 
 Button.propTypes = {
-  primary: PropTypes.bool,
-  backgroundColor: PropTypes.string,
-  size: PropTypes.oneOf(['small', 'medium', 'large']),
-  label: PropTypes.string.isRequired,
+  children: PropTypes.node.isRequired,
+  className: PropTypes.string,
+  color: PropTypes.oneOf(['primary', 'secondary', 'success', 'error', 'info', 'warning']),
   disabled: PropTypes.bool,
-  onClick: PropTypes.func
-};
-
-Button.defaultProps = {
-  backgroundColor: null,
-  primary: false,
-  size: 'medium',
-  onClick: undefined
+  endIcon: PropTypes.node,
+  fullWidth: PropTypes.bool,
+  loading: PropTypes.bool,
+  onClick: PropTypes.func,
+  size: PropTypes.oneOf(['small', 'medium', 'large']),
+  startIcon: PropTypes.node,
+  type: PropTypes.oneOf(['submit', 'reset', 'button']),
+  variant: PropTypes.oneOf(['contained', 'outlined', 'text'])
 };

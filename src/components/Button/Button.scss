@@ -1,40 +1,198 @@
-.storybook-button {
-  font-family: 'Nunito Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-  font-weight: 700;
-  border: 0;
-  border-radius: 3em;
-  cursor: pointer;
-  display: inline-block;
+.button {
+  --padding: 11px 20px;
+  --width: 148px;
+  --height: 48px;
+  --font-size: 14px;
+  --color: var(--white);
+  --bg-color: var(--primary);
+  --bg-color-hover: var(--primary-dark);
+  --bg-color-active: var(--primary-light);
+  --border-radius: 8px;
+  --loader-size: 24px;
+
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--padding);
+  min-width: var(--width);
+  min-height: var(--height);
+  white-space: nowrap;
+  font-family: inherit;
+  font-size: var(--font-size);
   line-height: 1;
-}
+  font-weight: 500;
+  color: var(--color);
+  background-color: var(--bg-color);
+  border: none;
+  border-radius: var(--border-radius);
+  user-select: none;
+  cursor: pointer;
+  transition: .3s color, .3s background-color, .3s border-color;
 
-.storybook-button:disabled {
-  pointer-events: none;
-  opacity: .5;
-}
+  &:hover, &:focus-visible {
+    background-color: var(--bg-color-hover);
+  }
 
-.storybook-button--primary {
-  color: white;
-  background-color: #1ea7fd;
-}
+  &:disabled {
+    pointer-events: none;
+    opacity: .7;
+  }
 
-.storybook-button--secondary {
-  color: #333333;
-  background-color: transparent;
-  box-shadow: rgba(0, 0, 0, 0.15) 0px 0px 0px 1px inset;
-}
+  // Color
+  &--secondary {
+    --bg-color: var(--secondary);
+    --bg-color-hover: var(--secondary-dark);
+    --bg-color-active: var(--secondary-light);
+  }
 
-.storybook-button--small {
-  font-size: 12px;
-  padding: 10px 16px;
-}
+  &--success {
+    --bg-color: var(--success);
+    --bg-color-hover: var(--success-dark);
+    --bg-color-active: var(--success-light);
+  }
 
-.storybook-button--medium {
-  font-size: 14px;
-  padding: 11px 20px;
-}
+  &--error {
+    --bg-color: var(--error);
+    --bg-color-hover: var(--error-dark);
+    --bg-color-active: var(--error-light);
+  }
 
-.storybook-button--large {
-  font-size: 16px;
-  padding: 12px 24px;
+  &--info {
+    --bg-color: var(--info);
+    --bg-color-hover: var(--info-dark);
+    --bg-color-active: var(--info-light);
+  }
+
+  &--warning {
+    --bg-color: var(--warning);
+    --bg-color-hover: var(--warning-dark);
+    --bg-color-active: var(--warning-light);
+  }
+
+  // Size
+  &--small {
+    --padding: 10px 16px;
+    --width: 105px;
+    --height: 35px;
+    --font-size: 12px;
+
+    .button__loader {
+      --loader-size: 18px;
+    }
+  }
+
+  &--large {
+    --padding: 12px 24px;
+    --width: 168px;
+    --height: 56px;
+    --font-size: 16px;
+
+    .button__loader {
+      --loader-size: 32px;
+    }
+  }
+
+  // Variant
+  &--outlined {
+    color: var(--bg-color);
+    background-color: transparent;
+    border: 1px solid var(--bg-color);
+
+    &:hover, &:focus-visible {
+      color: var(--bg-color-hover);
+      background-color: var(--bg-color-active);
+      border-color: var(--bg-color-hover);
+    }
+  }
+
+  &--text {
+    color: var(--bg-color);
+    background-color: transparent;
+
+    &:hover, &:focus-visible {
+      color: var(--bg-color-hover);
+      background-color: transparent;
+    }
+  }
+
+  // Full width
+  &--full-width {
+    --width: 100%;
+    max-width: var(--width);
+  }
+
+  // Loader
+  &__loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%);
+    width: var(--loader-size);
+    height: var(--loader-size);
+    border: 2px solid var(--bg-color);
+    border-top: 2px solid var(--color);
+    border-radius: 50%;
+    animation: buttonLoader .6s linear infinite;
+
+    @keyframes buttonLoader {
+      0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+  }
+
+  // Children
+  &__label,
+  &__icon {
+    position: relative;
+    z-index: 1;
+  }
+
+  // Icon
+  &__icon {
+    svg, img {
+      display: flex;
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    &--start {
+      margin-left: -24px;
+      margin-right: 8px;
+    }
+
+    &--end {
+      margin-left: 8px;
+      margin-right: -24px;
+    }
+  }
+
+  // Ripple
+  .button-ripple {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--border-radius);
+
+    &__item {
+      position: absolute;
+      transform: scale(0);
+      background-color: var(--bg-color);
+      border-radius: 50%;
+      animation: buttonRipple .6s linear;
+
+      @keyframes buttonRipple {
+        to {
+          transform: scale(4);
+          opacity: 0;
+        }
+      }
+    }
+  }
 }
