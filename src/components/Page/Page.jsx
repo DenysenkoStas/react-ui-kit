@@ -3,10 +3,10 @@ import Header from '../Header';
 import './Page.scss';
 
 export default function Page() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState(undefined);
 
   return (
-    <article>
+    <article className='page'>
       <Header
         user={user}
         onLogin={() => setUser({name: 'Jane Doe'})}
