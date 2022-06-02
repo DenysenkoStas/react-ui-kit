@@ -9,8 +9,8 @@ export default function Portal({children, className, parent}) {
     const target = parent && parent.appendChild ? parent : document.body;
     const classList = ['portal-container'];
 
-    if (className) className.split(' ').forEach(item => classList.push(item));
-    classList.forEach(item => el.classList.add(item));
+    if (className) className.split(' ').forEach((item) => classList.push(item));
+    classList.forEach((item) => el.classList.add(item));
     target.appendChild(el);
 
     return () => {

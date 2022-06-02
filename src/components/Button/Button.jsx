@@ -2,23 +2,21 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import './Button.scss';
 
-export default function Button(
-  {
-    children,
-    className = '',
-    color = 'primary',
-    disabled = false,
-    endIcon,
-    fullWidth = false,
-    loading = false,
-    onClick,
-    size = 'medium',
-    startIcon,
-    type = 'button',
-    variant = 'contained',
-    ...props
-  }
-) {
+export default function Button({
+  children,
+  className = '',
+  color = 'primary',
+  disabled = false,
+  endIcon,
+  fullWidth = false,
+  loading = false,
+  onClick,
+  size = 'medium',
+  startIcon,
+  type = 'button',
+  variant = 'contained',
+  ...props
+}) {
   const rootClasses = ['button'];
   if (className) rootClasses.push(className);
   if (size !== 'medium') rootClasses.push(`button--${size}`);
@@ -49,14 +47,10 @@ export default function Button(
   }
 
   return (
-    <button
-      className={rootClasses.join(' ')}
-      type={type}
-      disabled={disabled}
-      onClick={createRipple}
-      {...props}
-    >
-      {loading ? <span className='button__loader' /> : (
+    <button className={rootClasses.join(' ')} type={type} disabled={disabled} onClick={createRipple} {...props}>
+      {loading ? (
+        <span className='button__loader' />
+      ) : (
         <>
           {startIcon && <span className='button__icon button__icon--start'>{startIcon}</span>}
           <span className='button__label'>{children}</span>
@@ -66,7 +60,7 @@ export default function Button(
       <span className='button-ripple' />
     </button>
   );
-};
+}
 
 Button.propTypes = {
   children: PropTypes.node.isRequired,

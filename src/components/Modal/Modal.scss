@@ -9,9 +9,9 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  background-color: rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.5);
   opacity: 0;
-  transition: opacity .3s;
+  transition: opacity 0.3s;
 
   &--active {
     opacity: 1;
@@ -45,7 +45,7 @@
     max-height: calc(100vh - 36px);
     background-color: var(--white);
     border-radius: 8px;
-    transition: opacity .3s, transform .3s;
+    transition: opacity 0.3s, transform 0.3s;
     opacity: 0;
   }
 
@@ -87,10 +87,11 @@
     }
 
     path {
-      transition: opacity .3s, fill .3s;
+      transition: opacity 0.3s, fill 0.3s;
     }
 
-    &:hover, &:focus-visible {
+    &:hover,
+    &:focus-visible {
       path {
         opacity: 1;
         fill: var(--error);

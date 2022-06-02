@@ -8,7 +8,7 @@ export default function Modal({children, className = '', fullScreen = false, max
   const [active, setActive] = useState(false);
   const parent = document.getElementById('root');
   const backdrop = useRef(null);
-  const stopPropagation = event => event.stopPropagation();
+  const stopPropagation = (event) => event.stopPropagation();
 
   const rootClasses = ['modal'];
   if (className) rootClasses.push(className);
@@ -38,21 +38,21 @@ export default function Modal({children, className = '', fullScreen = false, max
     };
   }, [open, onClose]);
 
-  return (open || active) && (
-    <Portal parent={parent}>
-      <div className={rootClasses.join(' ')} ref={backdrop} onClick={onClose}>
-        <div className='modal__dialog' style={{maxWidth}} onClick={stopPropagation}>
-          <div className='modal__content'>
-            {children}
+  return (
+    (open || active) && (
+      <Portal parent={parent}>
+        <div className={rootClasses.join(' ')} ref={backdrop} onClick={onClose}>
+          <div className='modal__dialog' style={{maxWidth}} onClick={stopPropagation}>
+            <div className='modal__content'>{children}</div>
+            <button className='modal__close' type='button' aria-label='Close modal' onClick={onClose}>
+              <CloseIcon />
+            </button>
           </div>
-          <button className='modal__close' type='button' aria-label='Close modal' onClick={onClose}>
-            <CloseIcon />
-          </button>
         </div>
-      </div>
-    </Portal>
+      </Portal>
+    )
   );
-};
+}
 
 Modal.propTypes = {
   children: PropTypes.node.isRequired,

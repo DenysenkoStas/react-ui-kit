@@ -28,15 +28,16 @@
   user-select: none;
   outline: none;
   cursor: pointer;
-  transition: .3s color, .3s background-color, .3s border-color;
+  transition: 0.3s color, 0.3s background-color, 0.3s border-color;
 
-  &:hover, &:focus-visible {
+  &:hover,
+  &:focus-visible {
     background-color: var(--bg-color-hover);
   }
 
   &:disabled {
     pointer-events: none;
-    opacity: .7;
+    opacity: 0.7;
   }
 
   // Color
@@ -99,7 +100,8 @@
     background-color: transparent;
     border: 1px solid var(--bg-color);
 
-    &:hover, &:focus-visible {
+    &:hover,
+    &:focus-visible {
       color: var(--bg-color-hover);
       background-color: var(--bg-color-active);
       border-color: var(--bg-color-hover);
@@ -110,7 +112,8 @@
     color: var(--bg-color);
     background-color: transparent;
 
-    &:hover, &:focus-visible {
+    &:hover,
+    &:focus-visible {
       color: var(--bg-color-hover);
       background-color: transparent;
     }
@@ -133,7 +136,7 @@
     border: 2px solid var(--bg-color);
     border-top: 2px solid var(--color);
     border-radius: 50%;
-    animation: buttonLoader .6s linear infinite;
+    animation: buttonLoader 0.6s linear infinite;
 
     @keyframes buttonLoader {
       0% {
@@ -154,7 +157,8 @@
 
   // Icon
   &__icon {
-    svg, img {
+    svg,
+    img {
       display: flex;
       width: 24px;
       height: 24px;
@@ -185,7 +189,7 @@
       transform: scale(0);
       background-color: var(--bg-color);
       border-radius: 50%;
-      animation: buttonRipple .6s linear;
+      animation: buttonRipple 0.6s linear;
 
       @keyframes buttonRipple {
         to {

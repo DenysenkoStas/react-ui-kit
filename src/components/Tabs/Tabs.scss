@@ -13,12 +13,12 @@
     user-select: none;
     outline: none;
     cursor: pointer;
-    transition: color .3s;
+    transition: color 0.3s;
 
     &:after {
       content: '';
       width: 0;
-      transition: width .3s, background-color .3s;
+      transition: width 0.3s, background-color 0.3s;
     }
 
     &:not(:last-of-type) {

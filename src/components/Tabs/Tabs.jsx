@@ -41,7 +41,7 @@ export const Tabs = ({children, className = '', defaultIndex = 0, onTabClick}) =
         ))}
       </div>
       <div className='tabs__panel'>
-        {items.map(({props}) => bindIndex === props.index ? <TabItem key={props.index} {...props} /> : null)}
+        {items.map(({props}) => (bindIndex === props.index ? <TabItem key={props.index} {...props} /> : null))}
       </div>
     </div>
   );

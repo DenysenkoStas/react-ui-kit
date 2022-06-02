@@ -17,7 +17,9 @@ const Template = (args) => <Button {...args} />;
 
 export const Color = (args) => (
   <div className='preview-grid'>
-    <Button color='primary' {...args}>Primary</Button>
+    <Button color='primary' {...args}>
+      Primary
+    </Button>
     <Button color='secondary'>Secondary</Button>
     <Button color='success'>Success</Button>
     <Button color='error'>Error</Button>
@@ -53,7 +55,9 @@ Loading.args = {
 
 export const Size = (args) => (
   <div className='preview-grid'>
-    <Button size='small' {...args}>Small</Button>
+    <Button size='small' {...args}>
+      Small
+    </Button>
     <Button size='medium'>Medium</Button>
     <Button size='large'>Large</Button>
   </div>
@@ -67,7 +71,9 @@ StartIcon.args = {
 
 export const Variant = (args) => (
   <div className='preview-grid'>
-    <Button variant='contained' {...args}>Contained</Button>
+    <Button variant='contained' {...args}>
+      Contained
+    </Button>
     <Button variant='outlined'>Outlined</Button>
     <Button variant='text'>Text</Button>
   </div>
