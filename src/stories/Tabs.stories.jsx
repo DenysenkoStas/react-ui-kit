@@ -2,7 +2,7 @@ import React from 'react';
 import {TabItem, Tabs} from '../components/Tabs';
 
 export default {
-  title: 'Example/Tabs',
+  title: 'Shared/Tabs',
   component: Tabs,
   subcomponents: {TabItem}
 };
